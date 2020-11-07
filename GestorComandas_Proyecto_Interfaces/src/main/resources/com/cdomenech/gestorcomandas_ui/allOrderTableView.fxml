@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<GridPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cdomenech.gestorcomandas_ui.AllOrderTableController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="735.0" minHeight="10.0" prefHeight="689.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="1000.0" spacing="5.0" styleClass="upperBar" stylesheets="@style.css">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="64.0" prefWidth="165.0" stylesheets="@style.css" text="C O M A N D A S" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="61.0" prefWidth="165.0" stylesheets="@style.css" text="M É T R I C A S" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="61.0" prefWidth="165.0" stylesheets="@style.css" text="A C E R C A  D E ..." textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefWidth="1006.0" GridPane.rowIndex="1">
+         <children>
+            <TableView fx:id="allOrdersTable" prefHeight="626.0" prefWidth="1000.0" stylesheets="@style.css">
+               <columns>
+                  <TableColumn fx:id="idCol" prefWidth="47.0" style="-fx-alignment: CENTER;" text="N" />
+                  <TableColumn fx:id="comandaCol" prefWidth="721.0" text="COMANDA" />
+                  <TableColumn fx:id="precioTotalCol" prefWidth="107.0" style="-fx-alignment: CENTER;" text="PRECIO" />
+                  <TableColumn fx:id="nombreCol" prefWidth="124.0" style="-fx-alignment: CENTER;" text="NOMBRE" />
+               </columns>
+            </TableView>
+            <HBox fx:id="hBoxButtons" alignment="CENTER" prefHeight="88.0" prefWidth="1000.0" spacing="100.0">
+               <children>
+                  <Button fx:id="btnDelivered" alignment="CENTER" mnemonicParsing="false" onAction="#updateDelivered" prefHeight="64.0" prefWidth="165.0" stylesheets="@style.css" text="E N T R E G A D O" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnDeleteOrder" alignment="CENTER" mnemonicParsing="false" onAction="#deleteComanda" prefHeight="64.0" prefWidth="165.0" stylesheets="@style.css" text="E L I M I N A R" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnNewOrder" alignment="CENTER" mnemonicParsing="false" onAction="#newOrderWindow" prefHeight="64.0" prefWidth="165.0" stylesheets="@style.css" text="N U E V A" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</GridPane>
