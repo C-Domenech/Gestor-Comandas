@@ -16,7 +16,7 @@
  */
 package com.cdomenech.gestorcomandas_ui;
 
-import com.cdomenech.model.GestorComandas;
+import com.cdomenech.database.GestorComandas;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

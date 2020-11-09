@@ -1,0 +1,26 @@
+--class-path
+'C:/Users/crist/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;C:/Users/crist/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar;C:/Users/crist/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;C:/Users/crist/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar;C:/Users/crist/.m2/repository/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar;C:/Users/crist/.m2/repository/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar'
+--module-path
+'C:/Users/crist/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;C:/Users/crist/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar;E:/JAVA/GestorComandas_Proyecto_Interfaces/target/GestorComandas_Proyecto_Interfaces-1.0-SNAPSHOT.jar;C:/Users/crist/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;C:/Users/crist/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar'
+--patch-module
+com.cdomenech.gestorcomandas_ui='E:/JAVA/GestorComandas_Proyecto_Interfaces/src/main/java;E:/JAVA/GestorComandas_Proyecto_Interfaces/target/generated-sources/annotations'
+-encoding
+'UTF-8'
+-protected
+--module-source-path
+'E:/JAVA/GestorComandas_Proyecto_Interfaces/target/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2020. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'E:/JAVA/GestorComandas_Proyecto_Interfaces/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'GestorComandas_Proyecto_Interfaces 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'GestorComandas_Proyecto_Interfaces 1.0-SNAPSHOT API'

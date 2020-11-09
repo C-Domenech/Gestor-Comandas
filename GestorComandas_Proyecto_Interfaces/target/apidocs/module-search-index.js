@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"com.cdomenech.gestorcomandas_ui"}];updateSearchResults();

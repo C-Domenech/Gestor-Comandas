@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #333399;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="80.0" prefHeight="41.0" prefWidth="275.0" text="PROYECTO REALIZADO POR:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="179.0" layoutY="175.0" lineSpacing="15.0" prefHeight="98.0" prefWidth="243.0" text="Javier Torres Sevilla&#10;y &#10;Cristina Domenech Moreno" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

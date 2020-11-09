@@ -20,37 +20,16 @@
     -fx-background-color: #333399;
 }
 
-.table-view .column-header-background
+.table-view .table-cell{
+    -fx-font-weight:bold;
+}
 
 .table-view .column-header-background .label{
-    -fx-background-color: transparent;
+    -fx-background-color: #333399; 
+    -fx-font-weight:bold;
     -fx-text-fill: white;
-    -fx-background-color: #333399;
 }
 
-.table-view{
-    -fx-background-color: transparent;
-}
 .table-view .column-header-background{
     -fx-background-color: #333399;
-}
-.table-row-cell:selected {
-    -fx-background-color: #333399; 
-    -fx-text-fill: white;
-}
-.table-cell:selected { 
-    -fx-background-color: blueviolet; 
-    -fx-text-fill: white;
-}
-
-.table-row-cell:odd{
-    -fx-background-color:lightblue;
-}
-
-.table-view .column-header {
-    -fx-background-color: transparent;
-}
-
-.table-view .table-cell{
-    -fx-text-fill: white;
 }

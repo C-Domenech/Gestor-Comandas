@@ -16,7 +16,7 @@
  */
 package com.cdomenech.gestorcomandas_ui;
 
-import com.cdomenech.model.GestorComandas;
+import com.cdomenech.database.GestorComandas;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,6 +40,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,7 +49,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno
  */
 public class AllOrderTableController implements Initializable {
 
@@ -68,11 +71,12 @@ public class AllOrderTableController implements Initializable {
     private Button btnNewOrder;
     @FXML
     private HBox hBoxButtons;
+    @FXML
+    private Button btnEdit;
+    @FXML
+    private Button btnAcercaDe;
 
     private ObservableList<PedidosComanda> listPedidosComanda;
-    private ObservableList<ProductoPedido> listProductosSeleccionados = FXCollections.observableArrayList();
-    private double totalAmount;
-    private LinkedHashMap<Integer, Integer> productsPedidoCantidadLHM = new LinkedHashMap<Integer, Integer>();
     GestorComandas DB;
 
     public AllOrderTableController() throws IOException {
@@ -122,15 +126,13 @@ public class AllOrderTableController implements Initializable {
         ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(okButton, cancelButton);
         alert.showAndWait();
-        System.out.println("alert.getResult()" + alert.getResult());
-        System.out.println("ButtonType.YES " + ButtonType.YES);
-        if (alert.getResult().getButtonData().equals(ButtonType.YES.getButtonData())) {
+
+        if (alert.getResult().getButtonData().equals(okButton.getButtonData())) {
             PedidosComanda selectedComanda = allOrdersTable.getSelectionModel().getSelectedItem();
             DB.deleteComanda(selectedComanda.getId());
             updateTable();
         }
     }
-    
 
     @FXML
     private void newOrderWindow(ActionEvent event) {
@@ -146,6 +148,8 @@ public class AllOrderTableController implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false); // perfect size -> 495,750
             stage.setTitle("Añadir nueva comanda");
+            Image image = new Image("images/restaurant.png");
+            stage.getIcons().add(image);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             updateTable();
@@ -154,5 +158,86 @@ public class AllOrderTableController implements Initializable {
         }
     }
 
-}
+    @FXML
+    private void editComanda(ActionEvent event) throws IOException {
+        PedidosComanda selectedComandaToEdit = allOrdersTable.getSelectionModel().getSelectedItem();
+        int id_comanda = selectedComandaToEdit.getId();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editOrderView.fxml"));
 
+            Parent root = fxmlLoader.load();
+
+            EditOrderController controller = fxmlLoader.getController();
+            controller.initData(id_comanda);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false); // perfect size -> 495,750
+            stage.setTitle("Editar comanda");
+            Image image = new Image("images/restaurant.png");
+            stage.getIcons().add(image);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            updateTable();
+        } catch (IOException ex) {
+            Logger.getLogger(AllOrderTableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void acercaDeWindow(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("acercaDeView.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false); // perfect size -> 495,750
+            stage.setTitle("Acerca de...");
+            Image image = new Image("images/restaurant.png");
+            stage.getIcons().add(image);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(AllOrderTableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void openDetails(MouseEvent event) {
+        allOrdersTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                if (t.getClickCount() == 2) {
+                    PedidosComanda selectedComanda = allOrdersTable.getSelectionModel().getSelectedItem();
+                    //System.out.println("selectedComanda " + selectedComanda);
+                    int id_comanda = selectedComanda.getId();
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("detailView.fxml"));
+
+                        Parent root = fxmlLoader.load();
+
+                        DetailController controller = fxmlLoader.getController();
+                        controller.initDataDetails(id_comanda);
+
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.setResizable(false); // perfect size -> 495,750
+                        stage.setTitle("Detalles de la comanda");
+                        Image image = new Image("images/restaurant.png");
+                        stage.getIcons().add(image);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.showAndWait();
+                    } catch (IOException ex) {
+                        Logger.getLogger(AllOrderTableController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+    }
+
+}
