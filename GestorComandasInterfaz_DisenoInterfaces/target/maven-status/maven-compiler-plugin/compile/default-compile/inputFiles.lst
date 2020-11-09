@@ -1,12 +1,13 @@
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\module-info.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\DetailController.java
-E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\PedidosComanda.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\Comanda.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\AllOrderTableController.java
-E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\Pedido.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\App.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\Producto.java
-E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\NewOrderController.java
-E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\database\GestorComandas.java
+E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\BarChartController.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\EditOrderController.java
 E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\ProductoPedido.java
+E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\PedidosComanda.java
+E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\Pedido.java
+E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\gestorcomandas_ui\NewOrderController.java
+E:\JAVA\GestorComandas_Proyecto_Interfaces\src\main\java\com\cdomenech\database\GestorComandas.java

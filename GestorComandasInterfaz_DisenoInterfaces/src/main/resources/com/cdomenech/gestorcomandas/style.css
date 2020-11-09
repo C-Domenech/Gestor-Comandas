@@ -28,8 +28,12 @@
     -fx-background-color: #333399; 
     -fx-font-weight:bold;
     -fx-text-fill: white;
+    -fx-text-weight:strong;
+    -fx-border-style:solid outside;
+    -fx-border-color: #333399;
+    -fx-border-width: 2;
+    -fx-padding: 7;
+    -fx-font-size: 15;
 }
 
-.table-view .column-header-background{
-    -fx-background-color: #333399;
-}
+

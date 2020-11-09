@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class ProductoModelDB {
 
@@ -43,11 +43,20 @@ public class ProductoModelDB {
     private final String updateProducto = "UPDATE producto SET nombre = ?, precio = ? WHERE id_producto = ?";
     private final String deleteProducto = "DELETE FROM producto WHERE producto.id_producto = ?";
 
+    /**
+     *
+     * @param connection
+     * @throws IOException
+     * @throws SQLException
+     */
     public ProductoModelDB(Connection connection) throws IOException, SQLException {
         this.conn = connection;
         this.stmt = conn.createStatement();
     }
 
+    /**
+     * Get all the products the are in the database
+     */
     public void getAllProductos() {
         ArrayList<Object[]> result = new ArrayList<>();
         try {
@@ -66,6 +75,11 @@ public class ProductoModelDB {
         printProductos(result);
     }
 
+    /**
+     * Printer method 
+     * 
+     * @param result
+     */
     public void printProductos(ArrayList<Object[]> result) {
         System.out.println("========================================");
         System.out.println("Estos son los productos disponibles: ");
@@ -75,6 +89,12 @@ public class ProductoModelDB {
         }
     }
 
+    /**
+     * Insert new products
+     * 
+     * @param nombre
+     * @param precio
+     */
     public void insertNewProducto(String nombre, double precio) {
         try {
             preparedStmt = conn.prepareStatement(insertNewProducto);
@@ -93,6 +113,13 @@ public class ProductoModelDB {
         getAllProductos();
     }
 
+    /**
+     * Change a product
+     * 
+     * @param id_producto
+     * @param nombre
+     * @param precio
+     */
     public void updateProducto(int id_producto, String nombre, double precio) {
         try {
             preparedStmt = conn.prepareStatement(updateProducto);
@@ -112,6 +139,11 @@ public class ProductoModelDB {
         getAllProductos();
     }
 
+    /**
+     * Delete a product
+     * 
+     * @param id_producto
+     */
     public void deleteProducto(int id_producto) {
         try {
             preparedStmt = conn.prepareStatement(deleteProducto);
@@ -129,6 +161,10 @@ public class ProductoModelDB {
         getAllProductos();
     }
 
+    /**
+     *
+     * @param e
+     */
     public static void muestraErrorSQL(SQLException e) {
         System.out.println("Error SQL: " + e.getMessage());
         System.out.println("Estado: " + e.getSQLState());

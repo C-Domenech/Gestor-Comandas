@@ -1,11 +1,6 @@
-com\cdomenech\gestorcomandas_ui\ProductoPedido.class
 com\cdomenech\database\GestorComandas.class
 com\cdomenech\gestorcomandas_ui\App.class
 com\cdomenech\gestorcomandas_ui\NewOrderController.class
 com\cdomenech\gestorcomandas_ui\EditOrderController.class
-com\cdomenech\gestorcomandas_ui\PedidosComanda.class
-com\cdomenech\gestorcomandas_ui\Producto.class
 module-info.class
-com\cdomenech\gestorcomandas_ui\Pedido.class
 com\cdomenech\gestorcomandas_ui\AllOrderTableController.class
-com\cdomenech\gestorcomandas_ui\Comanda.class

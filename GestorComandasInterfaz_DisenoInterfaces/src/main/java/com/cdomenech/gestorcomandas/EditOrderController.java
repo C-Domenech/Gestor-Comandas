@@ -14,11 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.cdomenech.gestorcomandas_ui;
+package com.cdomenech.gestorcomandas;
 
 import com.cdomenech.database.GestorComandas;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -42,9 +44,9 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
-public class NewOrderController implements Initializable {
+public class EditOrderController implements Initializable {
 
     @FXML
     private TextField tfName;
@@ -52,8 +54,6 @@ public class NewOrderController implements Initializable {
     private ComboBox<Producto> comboBoxProduct;
     @FXML
     private ComboBox<Integer> comboBoxNumber;
-    @FXML
-    private Button btnAdd;
     @FXML
     private TableView<ProductoPedido> orderTable;
     @FXML
@@ -65,35 +65,78 @@ public class NewOrderController implements Initializable {
     @FXML
     private Label lbTotalAmount;
     @FXML
-    private Button btnOrder;
+    private Button btnUpdate;
+    @FXML
+    private Button btnAdd;
     @FXML
     private Button btnDelete;
 
     private ObservableList<Producto> listProductos;
     private ObservableList<Integer> listNumbers;
+
+    private ObservableList<ProductoPedido> listProductosComanda;
+
     private ObservableList<ProductoPedido> listProductosSeleccionados = FXCollections.observableArrayList();
     private double totalAmount;
     private LinkedHashMap<Integer, Integer> productsPedidoCantidadLHM = new LinkedHashMap<Integer, Integer>();
+    private ArrayList<Integer> productoToDelete = new ArrayList<>();
+    private int idComandaToBeEdited;
     GestorComandas DB;
 
-    public NewOrderController() throws IOException {
+    /**
+     * Class similar to New Order but it shows to the user all the info of the selected order
+     * 
+     * @throws IOException
+     */
+    public EditOrderController() throws IOException {
         this.DB = new GestorComandas();
     }
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         try {
             listProductos = DB.getProductos();
             comboBoxProduct.setItems(listProductos);
 
             listNumbers = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
             comboBoxNumber.setItems(listNumbers);
+
         } catch (IOException ex) {
-            Logger.getLogger(NewOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditOrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Get the id of the selected row in the main window
+     * 
+     * @param id_comanda
+     * @throws IOException
+     */
+    public void initData(int id_comanda) throws IOException {
+        this.idComandaToBeEdited = id_comanda;
+        Comanda c = new Comanda(DB.showNameCliente(id_comanda));
+        tfName.setText(c.getNombreCliente());
+        // Show the data that are in the order
+        listProductosComanda = DB.showComandaData(id_comanda);
+        productoCol.setCellValueFactory(new PropertyValueFactory<ProductoPedido, String>("nombre"));
+        cantidadCol.setCellValueFactory(new PropertyValueFactory<ProductoPedido, Integer>("cantidad"));
+        precioCol.setCellValueFactory(new PropertyValueFactory<ProductoPedido, String>("precioString"));
+
+        orderTable.setItems(listProductosComanda);
+        listProductosSeleccionados = listProductosComanda;
+        for (ProductoPedido p : listProductosComanda) {
+            productsPedidoCantidadLHM.put(p.getIdProducto(), p.getCantidad());
+            totalAmount += p.getPrecio();
+            System.out.println("LHM: " + productsPedidoCantidadLHM);
+        }
+        lbTotalAmount.setText(String.format("%,.2f", totalAmount) + " €");
     }
 
     @FXML
@@ -108,21 +151,15 @@ public class NewOrderController implements Initializable {
                 for (ProductoPedido pp : listProductosSeleccionados) {
                     if (pp.getIdProducto() == p.getIdProducto()) {
                         pp.setCantidad(pp.getCantidad() + selectedNumber);
-                        //System.out.println("pp cantidad: " + pp.getCantidad());
-                        //System.out.println("va a entrar " + precioCantidad);
                         pp.setPrecio(selectedProduct.getPrecio() * pp.getCantidad());
-                        //System.out.println("pp precio: " + pp.getPrecio());
-                        //System.out.println("pp precioString: " + pp.getPrecioString());
                         orderTable.refresh();
                     }
                 }
                 productsPedidoCantidadLHM.put(idselectedProduct, productsPedidoCantidadLHM.get(idselectedProduct) + selectedNumber);
-                System.out.println("productsPedidoCantidadLHM: " + productsPedidoCantidadLHM);
             } else {
                 listProductosSeleccionados.add(p);
 
                 productsPedidoCantidadLHM.put(idselectedProduct, selectedNumber);
-                System.out.println("productsPedidoCantidadLHM: " + productsPedidoCantidadLHM);
             }
             productoCol.setCellValueFactory(new PropertyValueFactory<ProductoPedido, String>("nombre"));
             cantidadCol.setCellValueFactory(new PropertyValueFactory<ProductoPedido, Integer>("cantidad"));
@@ -131,11 +168,6 @@ public class NewOrderController implements Initializable {
 
             totalAmount += selectedProduct.getPrecio() * selectedNumber;
             lbTotalAmount.setText(String.format("%,.2f", totalAmount) + " €");
-
-            comboBoxProduct.getSelectionModel().clearAndSelect(-1);
-            comboBoxProduct.setPromptText("Selecciona un producto");
-            comboBoxNumber.getSelectionModel().clearAndSelect(-1);
-            comboBoxNumber.setPromptText("Cantidad");
         }
     }
 
@@ -148,6 +180,7 @@ public class NewOrderController implements Initializable {
         ProductoPedido selectedRow = orderTable.getSelectionModel().getSelectedItem();
 
         totalAmount -= selectedRow.getPrecio();
+        productoToDelete.add(selectedRow.getIdProducto());
         productsPedidoCantidadLHM.remove(selectedRow.getIdProducto());
         System.out.println("productsPedidoCantidadLHM: " + productsPedidoCantidadLHM);
 
@@ -157,27 +190,28 @@ public class NewOrderController implements Initializable {
     }
 
     @FXML
-    private void newComandaAndPedido(ActionEvent event) {
+    private void editComandaAndPedido(ActionEvent event) {
         if (checkTable()) {
-            String nameClient = tfName.getText();
-            DB.insertNewComanda(nameClient);
             for (Map.Entry<Integer, Integer> mapElement : productsPedidoCantidadLHM.entrySet()) {
-                DB.insertPedidoToLastNewComanda(mapElement.getKey(), mapElement.getValue());
+                DB.updateComandaEdited(idComandaToBeEdited, mapElement.getKey(), mapElement.getValue());
+            }
+            for (Integer id_producto : productoToDelete) {
+                try {
+                    DB.deletePedido(idComandaToBeEdited, id_producto);
+                } catch (SQLException ex) {
+                    Logger.getLogger(EditOrderController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             tfName.setText("");
-            comboBoxProduct.getSelectionModel().clearAndSelect(-1);
-            comboBoxProduct.setPromptText("Selecciona un producto");
-            comboBoxNumber.getSelectionModel().clearAndSelect(-1);
-            comboBoxNumber.setPromptText("Cantidad");
             orderTable.getItems().clear();
             productsPedidoCantidadLHM.clear();
             lbTotalAmount.setText("0,00 €");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setTitle("Información");
-            alert.setContentText("Comanda añadida correctamente");
+            alert.setContentText("Comanda modificada correctamente");
             alert.showAndWait();
-            Stage stage = (Stage) btnOrder.getScene().getWindow();
+            Stage stage = (Stage) btnUpdate.getScene().getWindow();
             stage.close();
 
         }

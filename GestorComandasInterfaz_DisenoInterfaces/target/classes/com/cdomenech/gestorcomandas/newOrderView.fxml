@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="748.0" prefWidth="496.0" spacing="40.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cdomenech.gestorcomandas_ui.NewOrderController">
+<VBox alignment="CENTER" prefHeight="748.0" prefWidth="496.0" spacing="40.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cdomenech.gestorcomandas.NewOrderController">
    <children>
       <Pane prefHeight="197.0" prefWidth="502.0">
          <children>

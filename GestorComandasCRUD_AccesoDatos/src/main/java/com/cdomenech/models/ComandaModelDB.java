@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class ComandaModelDB {
 
@@ -49,11 +49,21 @@ public class ComandaModelDB {
     private final String setComandaEntregada = "UPDATE comanda co SET co.precio =( SELECT SUM(pr.precio * pe.cantidad) FROM producto pr, pedido pe WHERE pe.id_producto = pr.id_producto AND pe.id_comanda = ? ), co.entregada = TRUE WHERE co.id_comanda = ? ";
     private final String selectPrecioTotal = "SELECT precio FROM comanda WHERE id_comanda = ?";
 
+    /**
+     *
+     * @param connection
+     * @throws IOException
+     * @throws SQLException
+     */
     public ComandaModelDB(Connection connection) throws IOException, SQLException {
         this.conn = connection;
         this.stmt = conn.createStatement();
     }
 
+    /**
+     * Method that get all the orders made by the user
+     *
+     */
     public void getAllComandas() {
         ArrayList<Object[]> result = new ArrayList<>();
         try {
@@ -74,6 +84,11 @@ public class ComandaModelDB {
         printComandas(result);
     }
 
+    /**
+     * Printer method
+     *
+     * @param result
+     */
     public void printComandas(ArrayList<Object[]> result) {
         System.out.println("========================================");
         System.out.println("Estas son las comandas no entregadas: ");
@@ -84,6 +99,11 @@ public class ComandaModelDB {
         System.out.println("========================================");
     }
 
+    /**
+     * Void method that inserts a new order
+     *
+     * @param nombre_cliente
+     */
     public void insertNewComanda(String nombre_cliente) {
         try {
             preparedStmt = conn.prepareStatement(insertNewComanda, Statement.RETURN_GENERATED_KEYS);
@@ -91,8 +111,8 @@ public class ComandaModelDB {
             int affectedRows = preparedStmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("> Comanda creada correctamente");
+                // Generated Keys -> get id of the last row created in the database
                 generatedKeys = preparedStmt.getGeneratedKeys();
-                //preparedStmt.close();
                 if (generatedKeys.next()) {
                     idLastComanda = generatedKeys.getInt(1);
                 }
@@ -104,9 +124,16 @@ public class ComandaModelDB {
         }
     }
 
+    /**
+     * Void method that inserts all the products ordered in a comanda
+     *
+     * @param id_producto Product selected by the user
+     * @param cantidad Number of products
+     */
     public void insertPedidoToLastNewComanda(int id_producto, int cantidad) {
         try {
             preparedStmt = conn.prepareStatement(insertPedidoToComanda);
+            // idLastComanda -> saved the id of the last comanda
             preparedStmt.setInt(1, idLastComanda);
             preparedStmt.setInt(2, id_producto);
             preparedStmt.setInt(3, cantidad);
@@ -123,6 +150,11 @@ public class ComandaModelDB {
 
     }
 
+    /**
+     * Method that get all the products in the selected order
+     *
+     * @param id_comanda
+     */
     public void getProductosComanda(int id_comanda) {
         ArrayList<Object[]> result = new ArrayList<>();
         try {
@@ -146,6 +178,14 @@ public class ComandaModelDB {
         }
     }
 
+    /**
+     * Void method that update an specific order that has been edited by the user
+     * 
+     * @param id_comanda id of an specific order
+     * @param id_productoSustituir product to be deleted
+     * @param id_productoNuevo new product
+     * @param cantidad quantity
+     */
     public void updateComanda(int id_comanda, int id_productoSustituir, int id_productoNuevo, int cantidad) {
         try {
             preparedStmt = conn.prepareStatement(updateComanda);
@@ -167,6 +207,13 @@ public class ComandaModelDB {
         getAllComandas();
     }
 
+    /**
+     * Void method that insert new products to an order
+     * 
+     * @param id_comanda
+     * @param id_producto
+     * @param cantidad
+     */
     public void insertPedidoToComanda(int id_comanda, int id_producto, int cantidad) {
         try {
             preparedStmt = conn.prepareStatement(insertPedidoToComanda);
@@ -186,6 +233,11 @@ public class ComandaModelDB {
         }
     }
 
+    /**
+     * Void method that delete an order
+     *
+     * @param id_comanda
+     */
     public void deleteComanda(int id_comanda) {
         try {
             preparedStmt = conn.prepareStatement(deleteComanda);
@@ -204,6 +256,12 @@ public class ComandaModelDB {
         getAllComandas();
     }
 
+    /**
+     * Update order and set it delivered
+     * 
+     * @param id_comanda
+     * @return total amount
+     */
     public double setComandaEntregada(int id_comanda) {
         double precioTotal = 0;
         try {
@@ -230,6 +288,10 @@ public class ComandaModelDB {
         return precioTotal;
     }
 
+    /**
+     *
+     * @param e
+     */
     public static void muestraErrorSQL(SQLException e) {
         System.out.println("Error SQL: " + e.getMessage());
         System.out.println("Estado: " + e.getSQLState());

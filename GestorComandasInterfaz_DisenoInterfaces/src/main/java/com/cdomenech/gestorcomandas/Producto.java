@@ -14,11 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.cdomenech.gestorcomandas_ui;
+package com.cdomenech.gestorcomandas;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class Producto {
 
@@ -26,45 +26,78 @@ public class Producto {
     private String nombreProducto;
     private double precioProducto;
 
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param precio
+     */
     public Producto(int id, String nombre, double precio) {
         this.idProducto = id;
         this.nombreProducto = nombre;
         this.precioProducto = precio;
     }
 
+    /**
+     *
+     * @param idProducto
+     */
     public Producto(int idProducto) {
         this.idProducto = idProducto;
     }
 
-//    public Producto(String nombre, String precio) {
-//        this.nombreProducto = nombre;
-//        this.precioProducto = precio;
-//    }
-
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return idProducto;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.idProducto = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombreProducto;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombreProducto = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPrecio() {
         return precioProducto;
     }
 
+    /**
+     *
+     * @param precio
+     */
     public void setPrecio(double precio) {
         this.precioProducto = precio;
     }
-
+    /**
+     * Method that format the name and price of the product to be shown in the ComboBox
+     * 
+     * @return 
+     */
     @Override
     public String toString() {
         return this.nombreProducto + " - " + String.format("%,.2f", this.precioProducto) + " €";

@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class Main {
 
@@ -146,7 +146,7 @@ public class Main {
                     Runtime.getRuntime().exit(0);
                 } else if (respuesta.equals("2")) {
                     String password = "4578";
-                    System.out.println("Introduce la contraseña: ");
+                    System.out.println("Introduce la contraseña:      ->[4578]");
                     respuesta = sc.nextLine();
                     if (respuesta.equals(password)) {
                         System.out.println("Bienvenido, al menú del administrador");

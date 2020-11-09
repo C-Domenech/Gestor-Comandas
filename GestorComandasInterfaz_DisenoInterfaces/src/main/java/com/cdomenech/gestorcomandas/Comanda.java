@@ -14,13 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.cdomenech.gestorcomandas_ui;
+package com.cdomenech.gestorcomandas;
 
 import java.security.Timestamp;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class Comanda {
     private int idComanda;
@@ -29,46 +29,90 @@ public class Comanda {
     private String nombreCliente;
     private boolean entregada;
 
+    /**
+     *
+     * @param nombreCliente
+     */
     public Comanda(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return idComanda;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.idComanda = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Timestamp getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPrecio() {
         return precio;
     }
 
+    /**
+     *
+     * @param precio
+     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombreCliente() {
         return nombreCliente;
     }
 
+    /**
+     *
+     * @param nombreCliente
+     */
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isEntregada() {
         return entregada;
     }
 
+    /**
+     *
+     * @param entregada
+     */
     public void setEntregada(boolean entregada) {
         this.entregada = entregada;
     }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="748.0" prefWidth="496.0" spacing="40.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cdomenech.gestorcomandas_ui.EditOrderController">
+<VBox alignment="CENTER" prefHeight="748.0" prefWidth="496.0" spacing="40.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cdomenech.gestorcomandas.EditOrderController">
    <children>
       <Pane prefHeight="197.0" prefWidth="502.0">
          <children>
@@ -24,7 +24,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfName" prefHeight="25.0" prefWidth="336.0" promptText="Introduce tu nombre">
+                  <TextField fx:id="tfName" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="336.0" promptText="Introduce tu nombre">
                      <VBox.margin>
                         <Insets left="80.0" right="80.0" />
                      </VBox.margin>

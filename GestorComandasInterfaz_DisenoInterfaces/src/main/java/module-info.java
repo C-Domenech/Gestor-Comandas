@@ -7,5 +7,5 @@ module com.cdomenech.gestorcomandas_ui {
     requires javafx.base;
 
     opens com.cdomenech.gestorcomandas_ui to javafx.fxml;
-    exports com.cdomenech.gestorcomandas_ui;
+    exports com.cdomenech.gestorcomandas;
 }

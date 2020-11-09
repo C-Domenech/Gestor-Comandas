@@ -1,4 +1,4 @@
-package com.cdomenech.gestorcomandas_ui;
+package com.cdomenech.gestorcomandas;
 
 /*
  * Copyright (C) 2020 Cristina Domenech <linkedin.com/in/c-domenech/>
@@ -31,7 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 /**
  * FXML Controller class
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class DetailController implements Initializable {
 
@@ -50,22 +50,33 @@ public class DetailController implements Initializable {
 
     private ObservableList<ProductoPedido> listProductosComanda;
 
-    private int idComanda;
     private double totalAmount;
     GestorComandas DB;
 
+    /**
+     *
+     * @throws IOException
+     */
     public DetailController() throws IOException {
         this.DB = new GestorComandas();
     }
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
+    /**
+     * // Method that set all the data of an specific order
+     * 
+     * @param id_comanda id of an specific order send by the controller
+     * @throws IOException
+     */
     public void initDataDetails(int id_comanda) throws IOException {
         listProductosComanda = DB.showComandaData(id_comanda);
         Comanda c = new Comanda(DB.showNameCliente(id_comanda));

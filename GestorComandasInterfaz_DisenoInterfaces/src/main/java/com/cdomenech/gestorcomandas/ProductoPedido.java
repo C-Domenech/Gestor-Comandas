@@ -14,11 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.cdomenech.gestorcomandas_ui;
+package com.cdomenech.gestorcomandas;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class ProductoPedido {
 
@@ -27,6 +27,13 @@ public class ProductoPedido {
     private int cantidad;
     private double precio;
 
+    /**
+     *
+     * @param idProducto
+     * @param nombre
+     * @param cantidad
+     * @param precio
+     */
     public ProductoPedido(int idProducto, String nombre, int cantidad, double precio) {
         this.idProducto = idProducto;
         this.nombre = nombre;
@@ -34,38 +41,75 @@ public class ProductoPedido {
         this.precio = precio;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIdProducto() {
         return idProducto;
     }
 
+    /**
+     *
+     * @param idProducto
+     */
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCantidad() {
         return cantidad;
     }
 
+    /**
+     *
+     * @param cantidad
+     */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPrecio() {
         return precio;
     }
 
+    /**
+     * Method that return the amount formatted
+     * 
+     * @return amount
+     */
     public String getPrecioString() {
         return String.format("%,.2f", precio) + " €";
     }
 
+    /**
+     *
+     * @param precio
+     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }

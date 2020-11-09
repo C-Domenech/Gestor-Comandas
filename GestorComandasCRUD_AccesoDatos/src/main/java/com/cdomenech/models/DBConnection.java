@@ -28,11 +28,18 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Cristina Domenech <linkedin.com/in/c-domenech/>
+ * @author Cristina Domenech Moreno, Javier Torres Sevilla
  */
 public class DBConnection {
     private Connection conn;
-        public Connection init() throws IOException {
+
+    /**
+     * Database connection
+     * 
+     * @return conn Connection
+     * @throws IOException
+     */
+    public Connection init() throws IOException {
         try {
             Properties params = new Properties();
             params.load(new FileReader("bbdd_phpmyadmin.cfg"));
