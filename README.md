@@ -1,6 +1,5 @@
 # Proyecto Gestor de Comandas
 
 
-
-![Gestor de comandas](img\Java-JavaFX-RestaurantOrderManager.gif)
+<img src="img\Java-JavaFX-RestaurantOrderManager.gif" width=500>
 
